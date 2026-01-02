@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | AI Engineer</title>
+    <style>
+        /* --- ELEGANT LIGHT THEME VARIABLES --- */
+        :root {
+            --bg-body: #ffffff;
+            --bg-sidebar: #fafafa;
+            --text-primary: #111111;   /* Sharp Black */
+            --text-secondary: #555555; /* Soft Grey */
+            --border-color: #e5e5e5;   /* Light Grey Border */
+            --accent: #000000;         /* Minimalist Black Accent */
+            
+            --font-main: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 300px;
+            background-color: var(--bg-sidebar);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            border-right: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .role {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
+            font-weight: 500;
+        }
+
+        /* Hover & Active State */
+        .nav-item:hover, .nav-item.active {
+            color: var(--accent);
+            padding-left: 20px;
+        }
+
+        /* The sliding line indicator */
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::before, .nav-item.active::before {
+            width: 12px;
+        }
+
+        /* --- MAIN CONTENT AREA --- */
+        .main-content {
+            margin-left: 300px; 
+            flex: 1;
+            padding: 80px 100px;
+            max-width: 1100px;
+        }
+
+        h1.page-title {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- ANIMATIONS --- */
+        .section {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PROJECTS STYLING (Minimalist Cards) --- */
+        .project-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #aaa;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* --- ABOUT STYLING --- */
+        .about-block {
+            margin-bottom: 50px;
+        }
+        
+        .about-block h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .about-block p, .about-block li {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        ul.resume-list {
+            list-style: none;
+        }
+
+        ul.resume-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-color);
+        }
+
+        strong {
+            color: var(--text-primary);
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 850px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 30px;
+                border-bottom: 1px solid var(--border-color);
+                border-right: none;
+            }
+            .main-content { margin-left: 0; padding: 40px 25px; }
+            .name { font-size: 1.5rem; }
+            .role { margin-bottom: 20px; }
+            .nav-menu { flex-direction: row; gap: 30px; }
+            .nav-item:hover, .nav-item.active { padding-left: 0; color: var(--accent); }
+            /* Hide the sliding line on mobile for cleaner look */
+            .nav-item::before { display: none; } 
+            .nav-item.active { border-bottom: 2px solid black; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT SIDEBAR -->
+    <nav class="sidebar">
+        <div class="header-group">
+            <div class="name">John Doe</div>
+            <div class="role">AI Engineer & Data Scientist</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="showSection('projects', this)">Projects</li>
+            <li class="nav-item" onclick="showSection('about', this)">About Me</li>
+        </ul>
+    </nav>
+
+    <!-- RIGHT CONTENT -->
+    <main class="main-content">
+        
+        <!-- PROJECTS SECTION (DEFAULT) -->
+        <section id="projects" class="section">
+            <h1 class="page-title">AI Research and Experimentation</h1>
+
+            <div class="project-card">
+                <div class="project-title">Transformer-based NLP Sentiment Engine</div>
+                <div class="project-desc">
+                    Fine-tuned BERT models to analyze financial market sentiment from unstructured news data. Achieved 94% accuracy in classifying bullish/bearish trends using PyTorch and Hugging Face pipelines.
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Computer Vision Defect Detection</div>
+                <div class="project-desc">
+                    Developed a YOLOv8 real-time object detection system for manufacturing lines. Reduced false positives by 15% using synthetic data generation and augmentation pipelines.
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Predictive Maintenance with IoT Data</div>
+                <div class="project-desc">
+                    Built an LSTM architecture to process time-series sensor data. Predicts machinery failure 48 hours in advance, integrated into a dashboard using Streamlit and Docker.
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Generative AI for Code Documentation</div>
+                <div class="project-desc">
+                    Experimentation with Llama-2 to auto-generate Python docstrings. Implemented RAG (Retrieval-Augmented Generation) to maintain context across large codebases.
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Reinforcement Learning for Portfolio Optimization</div>
+                <div class="project-desc">
+                    Created a Deep Q-Network (DQN) agent to simulate stock trading strategies. The model outperforms the S&P 500 benchmark in volatility-adjusted returns during backtesting.
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="section">
+            <h1 class="page-title">About Me</h1>
+            
+            <div class="about-block">
+                <h2>Bio</h2>
+                <p>
+                    I am a passionate AI Engineer focused on bridging the gap between theoretical research and scalable production models. With a strong foundation in mathematics and software engineering, I enjoy solving complex data problems that require innovative deep learning solutions.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <h2>Work Experience</h2>
+                <ul class="resume-list">
+                    <li>
+                        <strong>Senior Data Scientist</strong> at TechCorp <br>
+                        <small>2022 - Present</small><br>
+                        Leading LLM integration and overseeing model deployment infrastructure.
+                    </li>
+                    <li>
+                        <strong>Machine Learning Engineer</strong> at DataSolutions <br>
+                        <small>2019 - 2022</small><br>
+                        Deployed computer vision pipelines for automated quality assurance.
+                    </li>
+                    <li>
+                        <strong>Data Analyst</strong> at FinanceInc <br>
+                        <small>2017 - 2019</small><br>
+                        Specialized in SQL optimization and predictive financial modeling.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="about-block">
+                <h2>Education</h2>
+                <ul class="resume-list">
+                    <li>
+                        <strong>M.S. Computer Science (AI Specialization)</strong><br>
+                        Stanford University
+                    </li>
+                    <li>
+                        <strong>B.S. Mathematics & Statistics</strong><br>
+                        MIT
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Set Projects as visible immediately on load
+        document.getElementById('projects').style.display = 'block';
+
+        function showSection(sectionId, linkElement) {
+            // 1. Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(sec => {
+                sec.style.display = 'none';
+            });
+
+            // 2. Remove active class from all menu items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+
+            // 3. Show the selected section
+            const target = document.getElementById(sectionId);
+            target.style.display = 'block';
+
+            // 4. Set active class on clicked menu item
+            linkElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>
