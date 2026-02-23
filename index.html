@@ -1,350 +1,552 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arshan Munif | Data Scientist / AI Engineer</title>
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="AM_favicon_black_bg_32x32.png">
-    <style>
-        /* --- ELEGANT LIGHT THEME VARIABLES --- */
-        :root {
-            --bg-body: #ffffff;
-            --bg-sidebar: #fafafa;
-            --text-primary: #111111;   /* Sharp Black */
-            --text-secondary: #555555; /* Soft Grey */
-            --border-color: #e5e5e5;   /* Light Grey Border */
-            --accent: #000000;         /* Minimalist Black Accent */
-            
-            --font-main: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-            --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arshan Munif — Data Scientist & ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --accent: #2D5A3D;
+    --accent-light: #E8F0EB;
+    --border: #E8E8E4;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    --card-hover: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+  }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* --- SIDEBAR --- */
-        .sidebar {
-            width: 300px;
-            background-color: var(--bg-sidebar);
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            height: 100vh;
-            border-right: 1px solid var(--border-color);
-            z-index: 100;
-        }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-        .name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+  nav .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  nav .links { display: flex; gap: 2rem; }
+  nav .links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav .links a:hover { color: var(--accent); }
 
-        .role {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            margin-bottom: 80px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+  /* ── HERO ── */
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 10rem 2rem 5rem;
+    animation: fadeUp 0.8s ease-out;
+  }
+  .hero .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 620px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .hero .links-row {
+    display: flex; gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero .links-row a {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.55rem 1.2rem;
+    border: 1.5px solid var(--accent);
+    border-radius: 100px;
+    transition: all 0.25s;
+  }
+  .hero .links-row a:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+  .hero .links-row a svg { width: 16px; height: 16px; }
 
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+  /* ── SECTIONS ── */
+  section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  section .section-sub {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+  }
 
-        .nav-item {
-            cursor: pointer;
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            position: relative;
-            padding-left: 0;
-            font-weight: 500;
-        }
+  /* ── PROJECT CARDS ── */
+  .projects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 
-        /* Hover & Active State */
-        .nav-item:hover, .nav-item.active {
-            color: var(--accent);
-            padding-left: 20px;
-        }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.3s, transform 0.3s;
+    animation: fadeUp 0.6s ease-out both;
+  }
+  .project-card:nth-child(1) { animation-delay: 0.05s; }
+  .project-card:nth-child(2) { animation-delay: 0.1s; }
+  .project-card:nth-child(3) { animation-delay: 0.15s; }
+  .project-card:nth-child(4) { animation-delay: 0.2s; }
+  .project-card:nth-child(5) { animation-delay: 0.25s; }
+  .project-card:nth-child(6) { animation-delay: 0.3s; }
+  .project-card:nth-child(7) { animation-delay: 0.35s; }
+  .project-card:nth-child(8) { animation-delay: 0.4s; }
 
-        /* The sliding line indicator */
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
+  .project-card:hover {
+    box-shadow: var(--card-hover);
+    transform: translateY(-2px);
+  }
 
-        .nav-item:hover::before, .nav-item.active::before {
-            width: 12px;
-        }
+  .project-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
 
-        /* --- MAIN CONTENT AREA --- */
-        .main-content {
-            margin-left: 300px; 
-            flex: 1;
-            padding: 80px 100px;
-            max-width: 1100px;
-        }
+  .project-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
 
-        h1.page-title {
-            font-size: 2.2rem;
-            margin-bottom: 50px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
+  .project-card .card-link {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.35rem 0.85rem;
+    border: 1.5px solid var(--accent-light);
+    border-radius: 100px;
+    background: var(--accent-light);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .project-card .card-link:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
 
-        /* --- ANIMATIONS --- */
-        .section {
-            display: none;
-            opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
+  .project-card .description {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    font-weight: 300;
+  }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
 
-        /* --- PROJECTS STYLING (Minimalist Cards) --- */
-        .project-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            margin-bottom: 25px;
-            border-radius: 4px;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
-        }
+  .featured-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 100px;
+    background: var(--accent);
+    color: #fff;
+    margin-bottom: 0.8rem;
+  }
 
-        .project-card:hover {
-            border-color: #aaa;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
+  /* ── ABOUT ── */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .timeline-item {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .timeline-item:hover { border-color: var(--accent); }
+  .timeline-item .role {
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--text);
+  }
+  .timeline-item .company {
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .timeline-item .period {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
 
-        .project-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            letter-spacing: -0.02em;
-        }
+  /* ── FOOTER ── */
+  footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
 
-        .project-desc {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        /* --- ABOUT STYLING --- */
-        .about-block {
-            margin-bottom: 50px;
-        }
-        
-        .about-block h2 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        .about-block p, .about-block li {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-        }
-
-        ul.resume-list {
-            list-style: none;
-        }
-
-        ul.resume-list li {
-            margin-bottom: 20px;
-            padding-left: 20px;
-            border-left: 2px solid var(--border-color);
-        }
-
-        strong {
-            color: var(--text-primary);
-        }
-
-        /* --- MOBILE RESPONSIVENESS --- */
-        @media (max-width: 850px) {
-            body { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 30px;
-                border-bottom: 1px solid var(--border-color);
-                border-right: none;
-            }
-            .main-content { margin-left: 0; padding: 40px 25px; }
-            .name { font-size: 1.5rem; }
-            .role { margin-bottom: 20px; }
-            .nav-menu { flex-direction: row; gap: 30px; }
-            .nav-item:hover, .nav-item.active { padding-left: 0; color: var(--accent); }
-            /* Hide the sliding line on mobile for cleaner look */
-            .nav-item::before { display: none; } 
-            .nav-item.active { border-bottom: 2px solid black; }
-        }
-    </style>
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav .links { gap: 1.2rem; }
+    nav .links a { font-size: 0.78rem; }
+    .hero { padding-top: 8rem; }
+    .about-content { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card .card-header { flex-direction: column; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- LEFT SIDEBAR -->
-    <nav class="sidebar">
-        <div class="header-group">
-            <div class="name">Arshan Munif</div>
-            <div class="role">AI Engineer & Data Scientist</div>
-        </div>
-        
-        <ul class="nav-menu">
-            <li class="nav-item active" onclick="showSection('projects', this)">Projects</li>
-            <li class="nav-item" onclick="showSection('about', this)">About Me</li>
-        </ul>
-    </nav>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">Arshan Munif</a>
+  <div class="links">
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="https://www.linkedin.com/in/amunif/" target="_blank">LinkedIn</a>
+  </div>
+</nav>
 
-    <!-- RIGHT CONTENT -->
-    <main class="main-content">
-        
-        <!-- PROJECTS SECTION (DEFAULT) -->
-        <section id="projects" class="section">
-            <h1 class="page-title">AI Research and Experimentation</h1>
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Data Scientist &middot; ML Engineer</div>
+  <h1>Building intelligent systems at the intersection of data, models&nbsp;&amp;&nbsp;product.</h1>
+  <p>7+ years delivering ML solutions for financial crime, customer analytics, and operational intelligence at HSBC, Apple, and Colgate-Palmolive. MSc in Artificial Intelligence with Distinction from Brunel University.</p>
+  <div class="links-row">
+    <a href="https://www.linkedin.com/in/amunif/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://github.com/arshmun" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+      GitHub
+    </a>
+    <a href="mailto:amunif@outlook.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </a>
+  </div>
+</div>
 
-            <div class="project-card">
-                <div class="project-title">Transformer-based NLP Sentiment Engine</div>
-                <div class="project-desc">
-                    Fine-tuned BERT models to analyze financial market sentiment from unstructured news data. Achieved 94% accuracy in classifying bullish/bearish trends using PyTorch and Hugging Face pipelines.
-                </div>
-            </div>
+<!-- PROJECTS -->
+<section id="projects">
+  <h2>Selected Projects</h2>
+  <p class="section-sub">Machine Learning, Deep Learning, NLP, Computer Vision &amp; Agentic AI</p>
 
-            <div class="project-card">
-                <div class="project-title">Computer Vision Defect Detection</div>
-                <div class="project-desc">
-                    Developed a YOLOv8 real-time object detection system for manufacturing lines. Reduced false positives by 15% using synthetic data generation and augmentation pipelines.
-                </div>
-            </div>
+  <div class="projects-grid">
 
-            <div class="project-card">
-                <div class="project-title">Predictive Maintenance with IoT Data</div>
-                <div class="project-desc">
-                    Built an LSTM architecture to process time-series sensor data. Predicts machinery failure 48 hours in advance, integrated into a dashboard using Streamlit and Docker.
-                </div>
-            </div>
+    <!-- FEATURED: PlayStation CLV -->
+    <div class="project-card">
+      <span class="featured-tag">Featured</span>
+      <div class="card-header">
+        <h3>PlayStation CLV &amp; Next Best Action — End-to-End Player Analytics Pipeline</h3>
+        <a class="card-link" href="https://github.com/arshmun" target="_blank">View Project</a>
+      </div>
+      <p class="description">Comprehensive portfolio project simulating PlayStation's player analytics ecosystem. Built a full pipeline covering player behaviour simulation, churn prediction modelling, customer lifetime value estimation, and a marketing next-best-action recommendation engine — from raw data generation to business-ready reporting.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Simulation</span>
+        <span class="tag">CLV</span>
+        <span class="tag">Churn</span>
+      </div>
+    </div>
 
-            <div class="project-card">
-                <div class="project-title">Generative AI for Code Documentation</div>
-                <div class="project-desc">
-                    Experimentation with Llama-2 to auto-generate Python docstrings. Implemented RAG (Retrieval-Augmented Generation) to maintain context across large codebases.
-                </div>
-            </div>
+    <!-- Protein Simulations -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Unsupervised ML for Dimensionality Reduction in Protein Molecular Simulations</h3>
+        <a class="card-link" href="https://github.com/arshmun/MSRDimRed/tree/main" target="_blank">GitHub</a>
+      </div>
+      <p class="description">Automated unsupervised workflow applying PCA to high-dimensional biomolecular trajectory data, uncovering conformational dynamics in protein structure and motion.</p>
+      <div class="tag-row">
+        <span class="tag">R</span>
+        <span class="tag">bio3D</span>
+        <span class="tag">ggplot2</span>
+        <span class="tag">PCA</span>
+      </div>
+    </div>
 
-            <div class="project-card">
-                <div class="project-title">Reinforcement Learning for Portfolio Optimization</div>
-                <div class="project-desc">
-                    Created a Deep Q-Network (DQN) agent to simulate stock trading strategies. The model outperforms the S&P 500 benchmark in volatility-adjusted returns during backtesting.
-                </div>
-            </div>
-        </section>
+    <!-- Diabetes -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Diabetes Prediction with Random Forest &amp; RNN-LSTM on CDC Survey Data</h3>
+        <a class="card-link" href="https://colab.research.google.com/drive/1j8tg9IQpLnMZbguNvT715ACqKfhf1Edo?usp=sharing" target="_blank">Colab</a>
+      </div>
+      <p class="description">End-to-end classification pipeline on 400K+ CDC BRFSS responses, comparing traditional ML (Random Forest) against deep learning (RNN-LSTM) for diabetes prevalence estimation.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Keras</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">R</span>
+      </div>
+    </div>
 
-        <!-- ABOUT ME SECTION -->
-        <section id="about" class="section">
-            <h1 class="page-title">About Me</h1>
-            
-            <div class="about-block">
-                <h2>Bio</h2>
-                <p>
-                    I am a passionate AI Engineer focused on bridging the gap between theoretical research and scalable production models. With a strong foundation in mathematics and software engineering, I enjoy solving complex data problems that require innovative deep learning solutions.
-                </p>
-            </div>
+    <!-- MyGPT -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>MyGPT — AI Chatbot with Custom Knowledge Base</h3>
+        <a class="card-link" href="https://colab.research.google.com/drive/1HVHzCoDj3gmLwTlzjJ3W8ovHOC5nVavi?usp=sharing" target="_blank">Colab</a>
+      </div>
+      <p class="description">Proof-of-concept RAG chatbot using OpenAI GPT-3.5, LangChain, and LlamaIndex. Users supply their own documents and the system answers queries grounded in that specific knowledge base.</p>
+      <div class="tag-row">
+        <span class="tag">OpenAI</span>
+        <span class="tag">LangChain</span>
+        <span class="tag">LlamaIndex</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
 
-            <div class="about-block">
-                <h2>Work Experience</h2>
-                <ul class="resume-list">
-                    <li>
-                        <strong>Senior Data Scientist</strong> at TechCorp <br>
-                        <small>2022 - Present</small><br>
-                        Leading LLM integration and overseeing model deployment infrastructure.
-                    </li>
-                    <li>
-                        <strong>Machine Learning Engineer</strong> at DataSolutions <br>
-                        <small>2019 - 2022</small><br>
-                        Deployed computer vision pipelines for automated quality assurance.
-                    </li>
-                    <li>
-                        <strong>Data Analyst</strong> at FinanceInc <br>
-                        <small>2017 - 2019</small><br>
-                        Specialized in SQL optimization and predictive financial modeling.
-                    </li>
-                </ul>
-            </div>
+    <!-- Computer Vision -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Face Detection, Segmentation &amp; Object Recognition with Computer Vision</h3>
+        <a class="card-link" href="https://colab.research.google.com/drive/19N4pqxoeemhHUxrX4mIcKXx-5cnulv-k?usp=sharing" target="_blank">Colab</a>
+      </div>
+      <p class="description">Applied Haar cascade face detection, R-CNN image segmentation, and both standard and tiny YOLO for object detection across multiple image sets.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">YOLO</span>
+      </div>
+    </div>
 
-            <div class="about-block">
-                <h2>Education</h2>
-                <ul class="resume-list">
-                    <li>
-                        <strong>M.S. Computer Science (AI Specialization)</strong><br>
-                        Stanford University
-                    </li>
-                    <li>
-                        <strong>B.S. Mathematics & Statistics</strong><br>
-                        MIT
-                    </li>
-                </ul>
-            </div>
-        </section>
+    <!-- Resume NLP -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Resume Optimisation Using NLP &amp; Transformer Models</h3>
+        <a class="card-link" href="mailto:amunif@outlook.com">Request Code</a>
+      </div>
+      <p class="description">Sophisticated pipeline combining TF-IDF scoring, BERT embeddings, and transformer models to iteratively align resume content with target job descriptions via keyword injection and rephrasing.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">BERT</span>
+        <span class="tag">OpenAI</span>
+        <span class="tag">scikit-learn</span>
+      </div>
+    </div>
 
-    </main>
+    <!-- NLP -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Sentiment Analysis, Text Classification &amp; Topic Modelling</h3>
+        <a class="card-link" href="https://colab.research.google.com/drive/1QT73I4Go8q1prt90v_V3K8dPCQecpZuQ?usp=sharing" target="_blank">Colab</a>
+      </div>
+      <p class="description">NLP project covering sentiment analysis on movie reviews, newsgroup text classification, and flexible user-driven topic modelling.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">NLP</span>
+      </div>
+    </div>
 
-    <script>
-        // Set Projects as visible immediately on load
-        document.getElementById('projects').style.display = 'block';
+    <!-- GAN -->
+    <div class="project-card">
+      <div class="card-header">
+        <h3>Image Generation with Generative Adversarial Network (GAN)</h3>
+        <a class="card-link" href="https://colab.research.google.com/drive/14XIIth9H1xNRdXDW5V20G9cmZQwRaFkv?usp=sharing" target="_blank">Colab</a>
+      </div>
+      <p class="description">Trained a GAN on CIFAR-10, implementing and fine-tuning discriminator and generator networks to produce synthetic images with training visualisation.</p>
+      <div class="tag-row">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Keras</span>
+        <span class="tag">SciPy</span>
+      </div>
+    </div>
 
-        function showSection(sectionId, linkElement) {
-            // 1. Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(sec => {
-                sec.style.display = 'none';
-            });
+  </div>
+</section>
 
-            // 2. Remove active class from all menu items
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
+<!-- ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <p class="section-sub">Background &amp; experience</p>
 
-            // 3. Show the selected section
-            const target = document.getElementById(sectionId);
-            target.style.display = 'block';
+  <div class="about-content">
+    <div class="about-text">
+      <p>I'm a <strong>Data Scientist</strong> with 7+ years of experience building ML systems that drive real business decisions. Currently at <strong>HSBC</strong>, I work on financial crime risk scoring models, combining traditional machine learning with LLM-powered tooling.</p>
+      <p>Previously, I contributed to analytics and data science initiatives at <strong>Apple</strong> and <strong>Colgate-Palmolive</strong>, developing cross-functional solutions spanning demand forecasting, customer segmentation, and operational efficiency.</p>
+      <p>I hold an <strong>MSc in Artificial Intelligence</strong> (Distinction) from Brunel University, an MBA, and a BSc in Petroleum Engineering. I'm currently deepening my work in <strong>agentic AI systems</strong> — exploring how to orchestrate LLMs as reasoning engines within tool-augmented architectures.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="role">Data Scientist</div>
+        <div class="company">HSBC</div>
+        <div class="period">Present</div>
+      </div>
+      <div class="timeline-item">
+        <div class="role">Data Scientist</div>
+        <div class="company">Apple</div>
+        <div class="period">Previous</div>
+      </div>
+      <div class="timeline-item">
+        <div class="role">Data &amp; Analytics</div>
+        <div class="company">Colgate-Palmolive</div>
+        <div class="period">Previous</div>
+      </div>
+      <div class="timeline-item">
+        <div class="role">MSc Artificial Intelligence</div>
+        <div class="company">Brunel University</div>
+        <div class="period">Distinction</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            // 4. Set active class on clicked menu item
-            linkElement.classList.add('active');
-        }
-    </script>
+<!-- FOOTER -->
+<footer>
+  <span>&copy; 2026 Arshan Munif</span>
+  <a href="mailto:amunif@outlook.com">amunif@outlook.com</a>
+</footer>
+
+<script>
+  // Navbar shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Fade-in cards on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.animationPlayState = 'paused';
+    observer.observe(card);
+  });
+</script>
+
 </body>
 </html>
